@@ -7,10 +7,13 @@ class RPNTest {
     public void evaluateSimple()
     {
         //given
+        RPN r = new RPN();
 
         //when
+        String result = r.evaluate("3 4 +"); //3+4
 
         //then
+        assertEquals("7.0", result);
 
     }
 
@@ -18,10 +21,13 @@ class RPNTest {
     public void evaluateComplex()
     {
         //given
+        RPN r = new RPN();
 
         //when
+        String result = r.evaluate("3 4 + 2 9 * -"); //3+4-2*9
 
         //then
+        assertEquals("-11.0", result);
 
     }
 
@@ -29,10 +35,14 @@ class RPNTest {
     public void evaluateError()
     {
         //given
+        RPN r = new RPN();
 
         //when
+        String result = r.evaluate("3 4 + 2 9 * - /"); //error
 
         //then
+        assertEquals("Invalid syntax", result);
+
 
     }
 
