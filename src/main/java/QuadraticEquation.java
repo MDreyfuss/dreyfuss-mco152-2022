@@ -1,8 +1,8 @@
 public class QuadraticEquation {
 
-    private double a;
-    private double b;
-    private double c;
+    private final double a;
+    private final double b;
+    private final double c;
 
     public QuadraticEquation(double a, double b, double c) {
         this.a = a;
@@ -10,22 +10,11 @@ public class QuadraticEquation {
         this.c = c;
     }
 
-    public double getA() {
-        return a;
-    }
-
-    public double getB() {
-        return b;
-    }
-
-    public double getC() {
-        return c;
-    }
-
     public double[] getX()
     {
-       return new double[]{(-b + Math.sqrt(b * b - 4 * a * c))/( 2 * a),
-                (-b - Math.sqrt(b * b - 4 * a * c)) / (2 * a)};
+        double sqrt = Math.sqrt(b * b - 4 * a * c);
+        return new double[]{ (-b + sqrt) / (2 * a),
+                             (-b - sqrt) / (2 * a)};
     }
 
 }
