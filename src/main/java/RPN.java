@@ -19,7 +19,7 @@ public class RPN
                 switch (character)
                 {
                     case "+":
-                        if (!stackGood(stack))
+                        if (stackLow(stack))
                         {
                             return INVALID;
                         }
@@ -28,7 +28,7 @@ public class RPN
                         stack.push(value1 + value2);
                         break;
                     case "-":
-                        if (!stackGood(stack))
+                        if (stackLow(stack))
                         {
                             return INVALID;
                         }
@@ -37,7 +37,7 @@ public class RPN
                         stack.push(value1 - value2);
                         break;
                     case "*":
-                        if (!stackGood(stack))
+                        if (stackLow(stack))
                         {
                             return INVALID;
                         }
@@ -46,7 +46,7 @@ public class RPN
                         stack.push(value1 * value2);
                         break;
                     case "/":
-                        if (!stackGood(stack))
+                        if (stackLow(stack))
                         {
                             return INVALID;
                         }
@@ -75,15 +75,15 @@ public class RPN
         return result.toString();
     }
 
-    public boolean stackGood (Stack stack)
+    public boolean stackLow (Stack stack)
     {
         if (stack.size() >= 2)
         {
-            return true;
+            return false;
         }
         else
         {
-            return false;
+            return true;
         }
     }
 }
