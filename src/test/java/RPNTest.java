@@ -41,9 +41,20 @@ class RPNTest {
         String result = r.evaluate("3 4 + 2 9 * - /"); //error
 
         //then
-        assertEquals("Invalid syntax", result);
+        assertEquals("Invalid Syntax", result);
+    }
 
+    @Test
+    public void evaluateExtraJunk()
+    {
+        //given
+        RPN r = new RPN();
 
+        //when
+        String result = r.evaluate("2 3 4 +");
+
+        //then
+        assertEquals("7.0\nExtra junk ignored", result);
     }
 
 }

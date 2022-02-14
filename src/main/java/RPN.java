@@ -2,57 +2,88 @@
  * LCW MCON 264
  * Evaluates an RPN expression
  * by: Miriam Dreyfuss
- */
+ **/
 
 import java.util.Stack;
 
 public class RPN
 {
+    static final String INVALID = "Invalid Syntax";
     public String evaluate(String expression)
     {
         String[] values = expression.split(" ");
         Stack<Double> stack = new Stack<>();
         for (String character: values)
         {
-            try
-            {
-                stack.push(Double.parseDouble(character));
-            }
-            catch (NumberFormatException notInt)
-            {
-                if (stack.isEmpty())
+         double value1, value2;
+                switch (character)
                 {
-                    return ("Invalid syntax");
-                }
-                else
-                {
-                    double value2 = stack.pop();
-                    if (stack.isEmpty())
-                    {
-                        return ("Invalid syntax");
-                    }
-                    double value1 = stack.pop();
-                    if (character.equals("/")) {
-                        stack.push(value1 / value2);
-                    } else if (character.equals("*")) {
-                        stack.push(value1 * value2);
-                    } else if (character.equals("-")) {
-                        stack.push(value1 - value2);
-                    } else if (character.equals("+")) {
+                    case "+":
+                        if (!stackGood(stack))
+                        {
+                            return INVALID;
+                        }
+                        value2 = stack.pop();
+                        value1 = stack.pop();
                         stack.push(value1 + value2);
-                    } else {
-                        stack.empty();
-                        return ("Invalid syntax");
+                        break;
+                    case "-":
+                        if (!stackGood(stack))
+                        {
+                            return INVALID;
+                        }
+                        value2 = stack.pop();
+                        value1 = stack.pop();
+                        stack.push(value1 - value2);
+                        break;
+                    case "*":
+                        if (!stackGood(stack))
+                        {
+                            return INVALID;
+                        }
+                        value2 = stack.pop();
+                        value1 = stack.pop();
+                        stack.push(value1 * value2);
+                        break;
+                    case "/":
+                        if (!stackGood(stack))
+                        {
+                            return INVALID;
+                        }
+                        value2 = stack.pop();
+                        value1 = stack.pop();
+                        stack.push(value1 / value2);
+                        break;
+                    default:
+                        try
+                        {
+                            stack.push(Double.parseDouble(character));
+                        }
+                        catch (NumberFormatException notInt)
+                        {
+                            stack.empty();
+                            return INVALID;
+                        }
                     }
                 }
-            }
-        }
         Double result = stack.pop();
         if (!stack.isEmpty())
         {
             stack.empty();
-            return (result + "\n Extra junk ignored");
+            return (result + "\nExtra junk ignored");
         }
-        return ("" + result);
+        return result.toString();
+    }
+
+    public boolean stackGood (Stack stack)
+    {
+        if (stack.size() >= 2)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 }
