@@ -70,7 +70,7 @@ public class RPN
         if (!stack.isEmpty())
         {
             stack.empty();
-            return (result + "\nExtra junk ignored");
+            return result + "\nExtra junk ignored";
         }
         return result.toString();
     }
