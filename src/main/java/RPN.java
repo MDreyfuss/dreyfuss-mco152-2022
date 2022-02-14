@@ -13,63 +13,52 @@ public class RPN
     {
         String[] values = expression.split(" ");
         Stack<Double> stack = new Stack<>();
-        for (String character: values)
-        {
-         double value1, value2;
-                switch (character)
-                {
-                    case "+":
-                        if (stackLow(stack))
-                        {
-                            return INVALID;
-                        }
-                        value2 = stack.pop();
-                        value1 = stack.pop();
-                        stack.push(value1 + value2);
-                        break;
-                    case "-":
-                        if (stackLow(stack))
-                        {
-                            return INVALID;
-                        }
-                        value2 = stack.pop();
-                        value1 = stack.pop();
-                        stack.push(value1 - value2);
-                        break;
-                    case "*":
-                        if (stackLow(stack))
-                        {
-                            return INVALID;
-                        }
-                        value2 = stack.pop();
-                        value1 = stack.pop();
-                        stack.push(value1 * value2);
-                        break;
-                    case "/":
-                        if (stackLow(stack))
-                        {
-                            return INVALID;
-                        }
-                        value2 = stack.pop();
-                        value1 = stack.pop();
-                        stack.push(value1 / value2);
-                        break;
-                    default:
-                        try
-                        {
-                            stack.push(Double.parseDouble(character));
-                        }
-                        catch (NumberFormatException notInt)
-                        {
-                            stack.empty();
-                            return INVALID;
-                        }
+        for (String character: values) {
+            double value1, value2;
+            switch (character) {
+                case "+":
+                    if (stackLow(stack)) {
+                        return INVALID;
                     }
-                }
+                    value2 = stack.pop();
+                    value1 = stack.pop();
+                    stack.push(value1 + value2);
+                    break;
+                case "-":
+                    if (stackLow(stack)) {
+                        return INVALID;
+                    }
+                    value2 = stack.pop();
+                    value1 = stack.pop();
+                    stack.push(value1 - value2);
+                    break;
+                case "*":
+                    if (stackLow(stack)) {
+                        return INVALID;
+                    }
+                    value2 = stack.pop();
+                    value1 = stack.pop();
+                    stack.push(value1 * value2);
+                    break;
+                case "/":
+                    if (stackLow(stack)) {
+                        return INVALID;
+                    }
+                    value2 = stack.pop();
+                    value1 = stack.pop();
+                    stack.push(value1 / value2);
+                    break;
+                default:
+                    try {
+                        stack.push(Double.parseDouble(character));
+                    } catch (NumberFormatException notInt) {
+                        return INVALID;
+                    }
+            }
+        }
         Double result = stack.pop();
         if (!stack.isEmpty())
         {
-            stack.empty();
             return result + "\nExtra junk ignored";
         }
         return result.toString();
@@ -77,13 +66,6 @@ public class RPN
 
     public boolean stackLow (Stack stack)
     {
-        if (stack.size() >= 2)
-        {
-            return false;
-        }
-        else
-        {
-            return true;
-        }
+        return stack.size() < 2;
     }
 }
