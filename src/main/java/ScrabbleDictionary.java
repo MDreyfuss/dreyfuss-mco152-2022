@@ -9,7 +9,7 @@ public class ScrabbleDictionary {
 
     public ScrabbleDictionary()
     {
-        File dictionary = new File("C:\\ComputerMethodology\\dreyfuss-mcon152-2022\\dictionary.txt");
+        File dictionary = new File("dictionary.txt");
         try {
             Scanner readFile = new Scanner(dictionary);
             while (readFile.hasNextLine())
