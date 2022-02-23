@@ -6,6 +6,7 @@ public class ScrabbleGame {
 
     List<String> playedWords = new ArrayList<>();
     List<Character> tiles = new ArrayList<>();
+    List<Character> tilesTesting = new ArrayList<>();
     ScrabbleDictionary dictionary = new ScrabbleDictionary();
     Random randomLetter = new Random();
 
@@ -29,11 +30,15 @@ public class ScrabbleGame {
             for (int i = 0; i < word.length(); i++)
             {
                 Character currChar = word.charAt(i);
-                if (!tiles.remove(currChar)) //should I use a deep copy & not ruin original list??
+                if (!tilesTesting.remove(currChar)) //should I use a deep copy & not ruin original list??
                 {
+                    tilesTesting.clear();
+                    tilesTesting.addAll(tiles);
                     return false;
                 }
             }
+            tiles.clear();
+            tiles.addAll(tilesTesting);
             refillTiles();
             playedWords.add(word);
             return true;
@@ -45,9 +50,10 @@ public class ScrabbleGame {
     {
         for (int i = tiles.size(); i < 7; i++)
         {
-            int newLetterValue = randomLetter.nextInt(26) + 65;
+            int newLetterValue = randomLetter.nextInt(26) + 65; //generate a letter with randomized ASCII values
             char newLetter = (char) newLetterValue;
             tiles.add(newLetter);
+            tilesTesting.add(newLetter);
         }
     }
 }
