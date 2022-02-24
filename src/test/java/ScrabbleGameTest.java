@@ -64,8 +64,8 @@ class ScrabbleGameTest {
         //when
 
         //then
-        Mockito.verify(dictionary).isWord("HELO");
         assertFalse(game.playWord("helo"));
+        Mockito.verify(dictionary).isWord("HELO");
         assertTrue(game.playedWords.isEmpty());
 
     }

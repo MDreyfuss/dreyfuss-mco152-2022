@@ -31,7 +31,7 @@ public class ScrabbleGame {
             for (int i = 0; i < word.length(); i++)
             {
                 Character currChar = word.charAt(i);
-                if (!tilesTesting.remove(currChar)) //should I use a deep copy & not ruin original list??
+                if (!tilesTesting.remove(currChar))
                 {
                     tilesTesting.clear();
                     tilesTesting.addAll(tiles);
