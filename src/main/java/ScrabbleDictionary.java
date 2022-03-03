@@ -1,5 +1,4 @@
-import java.io.File;
-import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -9,8 +8,9 @@ public class ScrabbleDictionary {
 
     public ScrabbleDictionary()
     {
-        File dictionary = new File("dictionary.txt");
-        try {
+            InputStream dictionary = ScrabbleDictionary.class
+                    .getResourceAsStream("dictionary.txt");
+
             Scanner readFile = new Scanner(dictionary);
             while (readFile.hasNextLine())
             {
@@ -25,9 +25,6 @@ public class ScrabbleDictionary {
                     words.put(entry[0], entry[1]);
                 }
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
     }
 
     public boolean isWord(String lookUpWord)
