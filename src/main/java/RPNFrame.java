@@ -7,7 +7,6 @@ public class RPNFrame extends JFrame {
     private JTextField inputField;
     private JButton submitButton;
     private JLabel outputLabel;
-    private JPanel verticalPanel;
 
     public RPNFrame(){
 

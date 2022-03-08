@@ -8,23 +8,22 @@ public class ScrabbleDictionary {
 
     public ScrabbleDictionary()
     {
-            InputStream dictionary = ScrabbleDictionary.class
-                    .getResourceAsStream("dictionary.txt");
+        InputStream dictionary = ScrabbleDictionary.class.getResourceAsStream("dictionary.txt");
 
-            Scanner readFile = new Scanner(dictionary);
-            while (readFile.hasNextLine())
+        Scanner readFile = new Scanner(dictionary);
+        while (readFile.hasNextLine())
+        {
+            String line = readFile.nextLine();
+            String[] entry = line.split(" ", 2);
+            if (entry.length == 1)
             {
-                String line = readFile.nextLine();
-                String[] entry = line.split(" ", 2);
-                if (entry.length == 1)
-                {
-                    words.put(entry[0], "");
-                }
-                else
-                {
-                    words.put(entry[0], entry[1]);
-                }
+                words.put(entry[0], "");
             }
+            else
+            {
+                words.put(entry[0], entry[1]);
+            }
+        }
     }
 
     public boolean isWord(String lookUpWord)

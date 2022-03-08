@@ -23,7 +23,7 @@ public class ScrabbleGame {
      *
      * @param word: Word to be tried
      */
-    public boolean playWord(String word)
+    public String playWord(String word)
     {
         word = word.toUpperCase();
         if (dictionary.isWord(word))
@@ -35,16 +35,16 @@ public class ScrabbleGame {
                 {
                     tilesTesting.clear();
                     tilesTesting.addAll(tiles);
-                    return false;
+                    return "Tiles not available";
                 }
             }
             tiles.clear();
             tiles.addAll(tilesTesting);
             refillTiles();
             playedWords.add(word);
-            return true;
+            return "Success!";
         }
-        return false;
+        return "Not a word";
     }
 
     public void refillTiles()

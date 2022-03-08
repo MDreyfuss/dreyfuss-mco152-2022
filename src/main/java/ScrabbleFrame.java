@@ -66,11 +66,8 @@ public class ScrabbleFrame extends JFrame{
     {
         outputLabel.setText("");
         String word = inputField.getText();
-        if (!dictionary.isWord(word))
-        {
-            outputLabel.setText("Not a valid word");
-        }
-        else if (scrabbleGame.playWord(word))
+        String result = scrabbleGame.playWord(word);
+        if (result.equals("Success!"))
         {
             score++;
             scoreLabel.setText("Score: " + score);
@@ -80,7 +77,7 @@ public class ScrabbleFrame extends JFrame{
         }
         else
         {
-            outputLabel.setText("Tiles not available");
+            outputLabel.setText(result);
         }
 
 

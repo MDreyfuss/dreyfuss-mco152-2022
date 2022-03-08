@@ -1,12 +1,14 @@
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class ScrabbleGameTest {
     ScrabbleDictionary dictionary = Mockito.mock(ScrabbleDictionary.class);
     LetterPool letterPool = Mockito.mock(LetterPool.class);
+
+    private final String SUCCESS = "Success!";
+    private final String NOT_A_WORD = "Not a word";
+    private final String NO_TILES = "Tiles not available";
 
     @Test
     public void playWord_true()
@@ -21,12 +23,12 @@ class ScrabbleGameTest {
         ScrabbleGame game = new ScrabbleGame(dictionary, letterPool);
 
         //when
-        boolean val = game.playWord("hello");
+        String val = game.playWord("hello");
 
         //then
         Mockito.verify(dictionary).isWord("HELLO");
         Mockito.verify(letterPool, Mockito.times(12)).getRandomLetter();
-        assertTrue(val);
+        assertEquals(SUCCESS, val);
         assertTrue(game.playedWords.contains("HELLO"));
         assertEquals(1, game.playedWords.size());
     }
@@ -46,7 +48,7 @@ class ScrabbleGameTest {
         //when
 
         //then
-        assertFalse(game.playWord("logo"));
+        assertEquals(NO_TILES, game.playWord("logo"));
         Mockito.verify(letterPool, Mockito.times(7)).getRandomLetter();
         assertTrue(game.playedWords.isEmpty());
         assertEquals(7, game.tiles.size());
@@ -64,7 +66,7 @@ class ScrabbleGameTest {
         //when
 
         //then
-        assertFalse(game.playWord("helo"));
+        assertEquals(NOT_A_WORD, game.playWord("helo"));
         Mockito.verify(dictionary).isWord("HELO");
         assertTrue(game.playedWords.isEmpty());
 
