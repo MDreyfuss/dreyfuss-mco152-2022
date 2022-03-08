@@ -6,10 +6,6 @@ class ScrabbleGameTest {
     ScrabbleDictionary dictionary = Mockito.mock(ScrabbleDictionary.class);
     LetterPool letterPool = Mockito.mock(LetterPool.class);
 
-    private final String SUCCESS = "Success!";
-    private final String NOT_A_WORD = "Not a word";
-    private final String NO_TILES = "Tiles not available";
-
     @Test
     public void playWord_true()
     {
@@ -28,7 +24,7 @@ class ScrabbleGameTest {
         //then
         Mockito.verify(dictionary).isWord("HELLO");
         Mockito.verify(letterPool, Mockito.times(12)).getRandomLetter();
-        assertEquals(SUCCESS, val);
+        assertEquals(game.SUCCESS, val);
         assertTrue(game.playedWords.contains("HELLO"));
         assertEquals(1, game.playedWords.size());
     }
@@ -48,7 +44,7 @@ class ScrabbleGameTest {
         //when
 
         //then
-        assertEquals(NO_TILES, game.playWord("logo"));
+        assertEquals(game.NO_TILES, game.playWord("logo"));
         Mockito.verify(letterPool, Mockito.times(7)).getRandomLetter();
         assertTrue(game.playedWords.isEmpty());
         assertEquals(7, game.tiles.size());
@@ -66,7 +62,7 @@ class ScrabbleGameTest {
         //when
 
         //then
-        assertEquals(NOT_A_WORD, game.playWord("helo"));
+        assertEquals(game.NOT_A_WORD, game.playWord("helo"));
         Mockito.verify(dictionary).isWord("HELO");
         assertTrue(game.playedWords.isEmpty());
 

@@ -67,7 +67,7 @@ public class ScrabbleFrame extends JFrame{
         outputLabel.setText("");
         String word = inputField.getText();
         String result = scrabbleGame.playWord(word);
-        if (result.equals("Success!"))
+        if (result.equals(scrabbleGame.SUCCESS))
         {
             score++;
             scoreLabel.setText("Score: " + score);

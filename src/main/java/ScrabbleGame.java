@@ -9,6 +9,10 @@ public class ScrabbleGame {
     ScrabbleDictionary dictionary;
     LetterPool letterPool;
 
+    static final String SUCCESS = "Success!";
+    static final String NOT_A_WORD = "Not a word";
+    static final String NO_TILES = "Tiles not available";
+
     public ScrabbleGame(ScrabbleDictionary dictionary, LetterPool letterPool)
     {
         this.dictionary = dictionary;
@@ -35,16 +39,16 @@ public class ScrabbleGame {
                 {
                     tilesTesting.clear();
                     tilesTesting.addAll(tiles);
-                    return "Tiles not available";
+                    return NO_TILES;
                 }
             }
             tiles.clear();
             tiles.addAll(tilesTesting);
             refillTiles();
             playedWords.add(word);
-            return "Success!";
+            return SUCCESS;
         }
-        return "Not a word";
+        return NOT_A_WORD;
     }
 
     public void refillTiles()
