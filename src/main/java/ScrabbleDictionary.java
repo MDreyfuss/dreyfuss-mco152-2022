@@ -1,5 +1,4 @@
-import java.io.File;
-import java.io.IOException;
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -9,24 +8,21 @@ public class ScrabbleDictionary {
 
     public ScrabbleDictionary()
     {
-        File dictionary = new File("dictionary.txt");
-        try {
-            Scanner readFile = new Scanner(dictionary);
-            while (readFile.hasNextLine())
+        InputStream dictionary = ScrabbleDictionary.class.getResourceAsStream("dictionary.txt");
+
+        Scanner readFile = new Scanner(dictionary);
+        while (readFile.hasNextLine())
+        {
+            String line = readFile.nextLine();
+            String[] entry = line.split(" ", 2);
+            if (entry.length == 1)
             {
-                String line = readFile.nextLine();
-                String[] entry = line.split(" ", 2);
-                if (entry.length == 1)
-                {
-                    words.put(entry[0], "");
-                }
-                else
-                {
-                    words.put(entry[0], entry[1]);
-                }
+                words.put(entry[0], "");
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+            else
+            {
+                words.put(entry[0], entry[1]);
+            }
         }
     }
 

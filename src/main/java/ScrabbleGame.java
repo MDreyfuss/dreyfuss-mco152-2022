@@ -9,6 +9,10 @@ public class ScrabbleGame {
     ScrabbleDictionary dictionary;
     LetterPool letterPool;
 
+    static final String SUCCESS = "Success!";
+    static final String NOT_A_WORD = "Not a word";
+    static final String NO_TILES = "Tiles not available";
+
     public ScrabbleGame(ScrabbleDictionary dictionary, LetterPool letterPool)
     {
         this.dictionary = dictionary;
@@ -23,7 +27,7 @@ public class ScrabbleGame {
      *
      * @param word: Word to be tried
      */
-    public boolean playWord(String word)
+    public String playWord(String word)
     {
         word = word.toUpperCase();
         if (dictionary.isWord(word))
@@ -35,16 +39,16 @@ public class ScrabbleGame {
                 {
                     tilesTesting.clear();
                     tilesTesting.addAll(tiles);
-                    return false;
+                    return NO_TILES;
                 }
             }
             tiles.clear();
             tiles.addAll(tilesTesting);
             refillTiles();
             playedWords.add(word);
-            return true;
+            return SUCCESS;
         }
-        return false;
+        return NOT_A_WORD;
     }
 
     public void refillTiles()
