@@ -60,4 +60,8 @@ public class ScrabbleGame {
             tilesTesting.add(newLetter);
         }
     }
+
+    public List<Character> getTiles() {
+        return tiles;
+    }
 }
