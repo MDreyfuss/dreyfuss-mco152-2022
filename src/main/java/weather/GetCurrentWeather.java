@@ -1,11 +1,10 @@
 package weather;
 
-import java.io.BufferedReader;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
+import weather.json.CurrentWeather;
+import weather.json.OpenWeatherMapService;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 public class GetCurrentWeather
 {
@@ -14,18 +13,20 @@ public class GetCurrentWeather
      * @throws IOException
      */
 
-    public double getTemperature() throws IOException
+    public CurrentWeather getCurrentWeather(String zipcode) throws IOException
     {
-        URL url = new URL("https://samples.openweathermap.org/data/2.5/weather?zip=10019,us&appid=b6907d289e10d714a6e88b30761fae22");
-        HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://samples.openweathermap.org")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
-        InputStream in = connection.getInputStream();
-        InputStreamReader inputStreamReader = new InputStreamReader(in);
-        BufferedReader reader = new BufferedReader(inputStreamReader);
+        OpenWeatherMapService service = retrofit.create(OpenWeatherMapService.class);
 
-        String line = reader.readLine();
-        System.out.println(line);
+       CurrentWeather currentWeather = service.getCurrentWeather("10019")
+               .execute()
+               .body();
 
-        return 0;
+        return currentWeather;
+
     }
 }
