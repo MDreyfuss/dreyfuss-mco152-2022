@@ -18,18 +18,11 @@ class GetCurrentWeatherTest {
         GetCurrentWeather getCurrentWeather = new GetCurrentWeather();
 
         //when
-        Observable<CurrentWeather> observable = getCurrentWeather.getCurrentWeather("10019");
+        CurrentWeather currentWeather = getCurrentWeather.getCurrentWeather("10019").blockingFirst();
 
-        Disposable disposable = observable
-                .subscribeOn(Schedulers.io())
-                .subscribe(this::onNext);
-    }
-    //then
-    public void onNext(CurrentWeather currentWeather)
-    {
-        assertTrue(currentWeather.getTemperature() > 0);
-        assertTrue(currentWeather.getMaxTemperature() > 0);
-        assertTrue(currentWeather.getMinTemperature() > 0);
+        assertTrue(currentWeather.getTemperature() > -459.67);
+        assertTrue(currentWeather.getMaxTemperature() > -459.67);
+        assertTrue(currentWeather.getMinTemperature() > -459.67);
         assertNotNull(currentWeather.getDescription());
         assertNotNull(currentWeather.getIcon());
     }

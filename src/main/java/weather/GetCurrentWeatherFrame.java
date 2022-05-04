@@ -14,6 +14,8 @@ public class GetCurrentWeatherFrame extends JFrame {
     private JTextField inputField;
     private JButton submitButton;
     private JLabel weatherLabel;
+    private Disposable disposable;
+    private CurrentWeatherPresenter presenter;
     GetCurrentWeather getCurrentWeather = new GetCurrentWeather();
 
     public GetCurrentWeatherFrame() {
@@ -42,29 +44,22 @@ public class GetCurrentWeatherFrame extends JFrame {
 
     private void onSubmitClicked(ActionEvent actionEvent)
     {
-        Observable<CurrentWeather> observable = getCurrentWeather.getCurrentWeather(inputField.getText());
-
-        Disposable disposable = observable
-                .subscribeOn(Schedulers.io())
-                .observeOn(Schedulers.newThread())
-                .subscribe(this::onNext, this::onError);
+        presenter.loadWeatherFromZip(inputField.getText());
     }
-
-    public void onNext(CurrentWeather currentWeather)
-    {
-        double fahrenheit = currentWeather.getTemperature();
-        weatherLabel.setText(String.valueOf(fahrenheit));
-    }
-
-    public void onError(Throwable throwable)
-    {
-        throwable.printStackTrace();
-    }
-
 
         public static void main(String[] args)
     {
         JFrame frame = new GetCurrentWeatherFrame();
         frame.setVisible(true);
+    }
+
+    public void setTemperature(double fahrenheit)
+    {
+        weatherLabel.setText(String.valueOf(fahrenheit));
+    }
+
+    public void showError()
+    {
+
     }
 }
