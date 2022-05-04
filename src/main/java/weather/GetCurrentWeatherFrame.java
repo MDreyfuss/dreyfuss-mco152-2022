@@ -19,6 +19,8 @@ public class GetCurrentWeatherFrame extends JFrame {
     GetCurrentWeather getCurrentWeather = new GetCurrentWeather();
 
     public GetCurrentWeatherFrame() {
+        presenter =  new CurrentWeatherPresenter(this, getCurrentWeather);
+
         setTitle("Get Current Weather");
         setSize(800, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
