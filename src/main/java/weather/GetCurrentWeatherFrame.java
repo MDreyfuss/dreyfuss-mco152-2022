@@ -17,6 +17,7 @@ public class GetCurrentWeatherFrame extends JFrame {
     private Disposable disposable;
     private CurrentWeatherPresenter presenter;
     GetCurrentWeather getCurrentWeather = new GetCurrentWeather();
+    private TemperatureSign temperatureSign;
 
     public GetCurrentWeatherFrame() {
         presenter =  new CurrentWeatherPresenter(this, getCurrentWeather);
@@ -41,6 +42,9 @@ public class GetCurrentWeatherFrame extends JFrame {
         weatherLabel = new JLabel("Current Weather");
         verticalPanel.add(weatherLabel);
 
+        temperatureSign = new TemperatureSign();
+        verticalPanel.add(temperatureSign);
+
 
     }
 
@@ -58,6 +62,7 @@ public class GetCurrentWeatherFrame extends JFrame {
     public void setTemperature(double fahrenheit)
     {
         weatherLabel.setText(String.valueOf(fahrenheit));
+
     }
 
     public void showError()
